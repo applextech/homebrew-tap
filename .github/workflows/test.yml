@@ -3,6 +3,9 @@ name: Test Homebrew formula
 on:
   push:
     branches: [main]
+    paths:
+      - "Formula/**"
+      - ".github/workflows/test.yml"
   pull_request:
   workflow_dispatch:
 
@@ -26,13 +29,11 @@ jobs:
         with:
           core: true
           cask: false
-      - name: Tap and trust the formula under test
-        run: |
-          brew tap applextech/homebrew-tap "$GITHUB_WORKSPACE"
-          brew trust --formula applextech/homebrew-tap/fedcli
+      - name: Trust the formula under test
+        run: brew trust --formula applextech/tap/fedcli
       - name: Audit formula
-        run: brew audit --strict --online applextech/homebrew-tap/fedcli
+        run: brew audit --strict --online applextech/tap/fedcli
       - name: Install FedCLI
-        run: brew install applextech/homebrew-tap/fedcli
+        run: brew install applextech/tap/fedcli
       - name: Verify FedCLI
         run: fedcli --help
