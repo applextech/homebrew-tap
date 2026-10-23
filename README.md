@@ -3,7 +3,7 @@
 Install FedCLI on macOS or Linux with Homebrew:
 
 ```bash
-brew install applextech/homebrew-tap/fedcli
+brew install applextech/tap/fedcli
 fedcli --help
 ```
 
