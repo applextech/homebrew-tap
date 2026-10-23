@@ -19,9 +19,20 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@18fcb8e3e06b4247c676c506750dc95ea7226479 # 2026.07.13.1
+        with:
+          core: true
+          cask: false
+      - name: Tap and trust the formula under test
+        run: |
+          brew tap applextech/homebrew-tap "$GITHUB_WORKSPACE"
+          brew trust --formula applextech/homebrew-tap/fedcli
       - name: Audit formula
-        run: brew audit --strict --online Formula/fedcli.rb
+        run: brew audit --strict --online applextech/homebrew-tap/fedcli
       - name: Install FedCLI
-        run: brew install --formula ./Formula/fedcli.rb
+        run: brew install applextech/homebrew-tap/fedcli
       - name: Verify FedCLI
         run: fedcli --help
