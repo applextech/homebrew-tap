@@ -1,5 +1,5 @@
 class Fedcli < Formula
-  desc "Federated CLI for PostgreSQL, MongoDB, DynamoDB, and 20+ data platforms"
+  desc "Federated CLI for SQL/NoSQL, search, graph, and cloud data: PostgreSQL, MongoDB"
   homepage "https://applextech.com/"
   url "https://github.com/applextech/fedcli/releases/download/v1.0.4/dbcli-1.0.4.jar"
   sha256 "54b41c36be733a589a632c6d57d88737afdce6c8b21bcda80e2390f7cd89fed6"
