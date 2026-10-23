@@ -1,0 +1,27 @@
+name: Test Homebrew formula
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  formula:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v6
+      - name: Audit formula
+        run: brew audit --strict --online Formula/fedcli.rb
+      - name: Install FedCLI
+        run: brew install --formula ./Formula/fedcli.rb
+      - name: Verify FedCLI
+        run: fedcli --help
